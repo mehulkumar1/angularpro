@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app>
+<head>
+  <title>crud-angularjs</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div class="container" ng-controller="listofnameempcode">
+
+    <div class="row">
+      <div class="page-header">
+        <div class="span9">
+          <h1>List of username and employee code</h1>
+        </div>
+        <div class="span3">
+          <input type="search" ng-model="search" placeholder="Search here...">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table id="list" class="table">
+        <thead>
+          <tr>
+            <th>select?</th>
+            <th>username</th>
+            <th>empcode</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="userdata in userinfo | filter:search" class="select-{{ userdata.select }}">
+            <td><input type="checkbox" ng-model="userdata.select"></td>
+            <td><strong>{{ userdata.username }}</strong></td>
+            <td>{{ userdata.empcode }}</td>
+            <td>
+              <button class="btn" ng-click="edituserdata($index)">
+                <i class="icon"></i> edit
+              </button>
+              <button class="btnn" ng-click="deleteuserdata($index)">
+                <i class="iconn"></i> delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form class="row" name="val">
+      <input type="text" ng-model="userdata.username" placeholder="username" required>
+      <input type="number" ng-model="userdata.empcode" placeholder="empcode" class="input-small" required>
+      <button ng-hide="edit" class="btn" ng-disabled="val.$invalid" ng-click="adduserdata()">
+        <i class="icon"></i> add
+      </button>
+      <button ng-show="edit" class="btn" ng-disabled="val.$invalid" ng-click="applyChanges()">
+        <i class="icon"></i> addno
+      </button>
+    </form>
+  </div>
+  <script src="lib/angular.min.js"></script>
+  <script src="app/controllers.js"></script>
+</body>
+</html>
